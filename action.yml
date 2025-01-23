@@ -27,7 +27,8 @@ runs:
         role-duration-seconds: 1380
         aws-region: ${{ env.AWS-REGION }}  
     - name: run script
-      run: cd $GITHUB_WORKSPACE/main; ${{ env.CI-SCRIPT-WORKING-DIRECTORY }}/${{ env.CI-SCRIPT-FOLDER-NAME }}/${{ inputs.script }} ${{ inputs.args }} 
+      run: |
+        HUB_ENV=${{ inputs.HUB_ENV }}
+        export HUB_ENV
+        cd $GITHUB_WORKSPACE/main; ${{ env.CI-SCRIPT-WORKING-DIRECTORY }}/${{ env.CI-SCRIPT-FOLDER-NAME }}/${{ inputs.script }} ${{ inputs.args }} 
       shell: bash
-      with:
-        HUB_ENV: ${{ inputs.HUB_ENV }}
