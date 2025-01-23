@@ -5,6 +5,11 @@ inputs:
     description: >
       The script file to be executed, with parameters.
     required: true
+  HUB_ENV:
+    description: >-
+        environment variables
+    required: true
+    type: string
   args:
     description: >
       arguments to be passed to the script
@@ -24,3 +29,5 @@ runs:
     - name: run script
       run: cd $GITHUB_WORKSPACE/main; ${{ env.CI-SCRIPT-WORKING-DIRECTORY }}/${{ env.CI-SCRIPT-FOLDER-NAME }}/${{ inputs.script }} ${{ inputs.args }} 
       shell: bash
+      with:
+        HUB_ENV: ${{ inputs.HUB_ENV }}
